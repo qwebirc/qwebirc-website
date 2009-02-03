@@ -1,0 +1,86 @@
+/* I HATE CSS */
+
+body, html {
+  font-family: Verdana, sans-serif;
+  background: #F2F0FF;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+a img {
+  border: 0;
+}
+
+div#header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background: white;
+  border-bottom: 1px solid gray;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+div#blocker {
+  height: 164px;
+}
+
+div#header .right {
+  position: absolute;
+  top: 0px;
+  left: 134px;
+  height: 134px;
+  right: 15px;
+  margin: 15px;
+  padding-left: 30px;
+}
+
+div#header .text h1 {
+  margin: 0px;
+  padding-top: 15px;
+  font-weight: normal;
+  font-size: 3em;
+  padding-bottom: 5px;
+}
+
+div#header .text .slogan {
+  font-style: italic;
+  font-size: 0.9em;
+  padding-left: 10px;
+}
+
+div#header .image {
+  height: 134px;
+  width: 134px;
+  margin-left: 15px;
+}
+
+div#header .clear {
+  clear: both;
+}
+
+div#content h2 {
+  margin: 0px;
+  font-size: 1.2em;
+}
+
+div#content {
+  margin: 5px;
+}
+
+p {
+  font-size: 0.8em;
+}
+
+div#menu {
+  position: absolute;
+  font-size: 0.8em;
+  bottom: 0px;
+  white-space: nowrap;
+}
+
+div#menu span {
+  padding-left: 10px;
+}

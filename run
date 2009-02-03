@@ -1,0 +1,2 @@
+#!/bin/sh
+exec cherryd -e production -d -c server.conf -i qwebirc $*
