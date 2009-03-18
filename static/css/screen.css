@@ -66,8 +66,20 @@ div#content h2 {
   font-size: 1.2em;
 }
 
+div#content h2 {
+  margin-bottom: 5px;
+}
+
 div#content {
   margin: 5px;
+}
+
+div#content #text {
+  font-size: 0.8em;
+}
+
+div#content #text pre {
+  font-size: 1.3em;
 }
 
 p {
