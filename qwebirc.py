@@ -1,7 +1,7 @@
 import cherrypy, os, string
 
 class MainSite(object):
-  def is_hg(self, kwargs):
+  def is_hg(self):
     if cherrypy.request.headers.get("X-Forwarded-Host") != "hg.qwebirc.org":
       return
 
@@ -12,13 +12,14 @@ class MainSite(object):
 
   @cherrypy.expose
   def index(self, *args, **kwargs):
+    self.is_hg()
     return self.news()
 
   def download_file(self, tag, format):
     raise cherrypy.HTTPRedirect("https://bitbucket.org/slug/qwebirc/get/%s.%s" % (tag, format))
 
 def set_downloads(obj):
-  for tag in ["tip", "stable"]:
+  for tag in ["default", "stable"]:
     for format in ["gz", "bz2", "zip"]:
       setattr(obj, "download-%s-%s" % (tag, format), (lambda tag=tag, format=format: cherrypy.expose(lambda: obj.download_file(tag, format)))())
 

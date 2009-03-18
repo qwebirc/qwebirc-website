@@ -3,9 +3,17 @@
 
 <h4>What do I need to run qwebirc?</h4>
 
-You need <a href="http://python.org/download/">Python</a> (at least version 2.5) and <a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).
+You need <a href="http://python.org/download/">Python</a> (at least version 2.5) and <a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).<br/>
+Though qwebirc will work without them, it is highly recommended that you also have <a href="http://java.com/en/download/index.jsp">Java</a> and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a>.
 
 <h4>Where do I begin?</h4>
 
-Copy config.py.example to config.py, and edit it to fit your setup.
-Then run run.py (if you get an error about the select reactor being already registered just run it again).
+<ul>
+  <li>Copy config.py.example to config.py, and edit it to fit your setup.
+  <li>Run compile.py to minify the Javascript/CSS and copy it to the correct location.</li>
+  <li>Run run.py (if you get an error about the select reactor being already registered just run it again).</li>
+</ul>
+
+<h4>I get warnings while running compile.py about java or hg!</h4>
+
+You can ignore those, but if you're seriously looking to deploy qwebirc on a public site you really should install <a href="http://java.com/en/download/index.jsp">Java</a> to minimise the size of your JavaScript, and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a> for tagging purposes (to minimise traffic and optimise for caches).
