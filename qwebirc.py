@@ -1,4 +1,6 @@
-import cherrypy, os, string
+import cherrypy, os, string, signal
+
+favicon = open("static/favicon.ico", "rb").read()
 
 class MainSite(object):
   def is_hg(self):
@@ -17,6 +19,12 @@ class MainSite(object):
 
   def download_file(self, tag, format):
     raise cherrypy.HTTPRedirect("https://bitbucket.org/slug/qwebirc/get/%s.%s" % (tag, format))
+
+  @cherrypy.expose
+  def favicon_ico(self):
+    #ie doesn't like this...
+    #cherrypy.response.headers["Content-Type"] = "image/vnd.microsoft.icon"
+    return favicon
 
 def set_downloads(obj):
   for tag in ["default", "stable"]:
@@ -38,7 +46,12 @@ def set_templates(obj, **kwargs):
     setattr(obj, filename, (lambda sub=sub: cherrypy.expose(lambda: sub))())
 
 site = MainSite()
-template = set_templates(site, news="News", features=dict(title="qwebirc's features", page_title="Features"), license="License", download="Download", about="About", faq="Frequently asked questions")
+def reload():
+  set_templates(site, news=dict(title="Welcome!", page_title="News"), features=dict(title="qwebirc's features", page_title="Features"), license="License", download="Download", about="About", faq="Frequently asked questions")
+
+reload()
 set_downloads(site)
+
+signal.signal(signal.SIGUSR2, lambda *args: reload())
 
 cherrypy.tree.mount(site, "/", config="qwebirc.conf")

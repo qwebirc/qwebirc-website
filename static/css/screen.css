@@ -48,7 +48,8 @@ div#header .text h1 {
 div#header .text .slogan {
   font-style: italic;
   font-size: 0.9em;
-  padding-left: 10px;
+  padding-left: 1px;
+  display: none;
 }
 
 div#header .image {
@@ -59,15 +60,6 @@ div#header .image {
 
 div#header .clear {
   clear: both;
-}
-
-div#content h2 {
-  margin: 0px;
-  font-size: 1.2em;
-}
-
-div#content h2 {
-  margin-bottom: 5px;
 }
 
 div#content {
@@ -94,5 +86,40 @@ div#menu {
 }
 
 div#menu span {
-  padding-left: 10px;
+  padding-left: 0px;
+}
+
+.warning {
+  border: 1px solid red;
+  padding: 3px;
+  margin-bottom: -2px;
+}
+
+div#content h2 {
+  margin: 0px;
+  margin-bottom: 6px;
+  margin-top: 8px;
+  font-size: 1.2em;
+}
+
+div#content h3 {
+  padding-bottom: 1px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+div#content h4 {
+  margin-bottom: 7px;
+  margin-top: 8px;
+}
+
+div#text-image {
+  background-image: url(/images/qwebirc-text.png);
+  margin-top: 33px;
+  height: 59px;
+  background-repeat: no-repeat;
+}
+
+div#text-image h1 {
+  display: none;
 }

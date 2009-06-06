@@ -1,19 +1,63 @@
+<a name="general">
+<h3>General questions</h3>
+
+<h4>Who is this website aimed at?</h4>
+
+This site and the downloads on it aimed at IRC network administrators.<br/>
+The qwebirc frontend is designed to be used by anyone, if you're just trying to add webchat on your website, type <tt>/EMBED</tt> inside a <a href="http://webchat.quakenet.org">qwebirc instance</a>.
+
 <a name="installation">
 <h3>Installation</h3>
 
 <h4>What do I need to run qwebirc?</h4>
 
 You need <a href="http://python.org/download/">Python</a> (at least version 2.5) and <a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).<br/>
+On Windows you also require <a href="http://sourceforge.net/project/showfiles.php?group_id=78018">pywin32</a>.<br/>
 Though qwebirc will work without them, it is highly recommended that you also have <a href="http://java.com/en/download/index.jsp">Java</a> and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a>.
 
-<h4>Where do I begin?</h4>
+<h4>What does qwebirc run on?</h4>
+
+The backend should run on anything that supports Python and Twisted, it has been tested on Linux, FreeBSD and Windows (XP and above).<br/>
+The frontend is tested on IE6, IE7, IE8, Firefox 3, Opera 9, Safari and Chrome.<br/>
+
+<h4>How do I get started?</h4>
 
 <ul>
+  <li>First make sure you've read the question above and you have everything required installed!</li>
   <li>Copy config.py.example to config.py, and edit it to fit your setup.
-  <li>Run compile.py to minify the Javascript/CSS and copy it to the correct location.</li>
-  <li>Run run.py (if you get an error about the select reactor being already registered just run it again).</li>
+  <li>Run compile.py to generate the HTML, minify the Javascript/CSS and copy everything to the correct locations.</li>
+  <li>Run run.py (if you get an error about the select reactor being already registered just run it again) -- note run.py has lots of arguments, you can see them with --help.</li>
+  <li>Browse to http://yourmachine:9090/</li>
 </ul>
 
-<h4>I get warnings while running compile.py about java or hg!</h4>
+<h4>I get warnings while running compile.py about java or hg, what are these?</h4>
 
-You can ignore those, but if you're seriously looking to deploy qwebirc on a public site you really should install <a href="http://java.com/en/download/index.jsp">Java</a> to minimise the size of your JavaScript, and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a> for tagging purposes (to minimise traffic and optimise for caches).
+If the warnings are about hg not being able to generate an id, or not being able to minify you can ignore them (with some pitfalls)!<br/>
+Normally qwebirc attempts to extract which version you are running (technically which changeset id), and uses that as part of the filename for the compiled JavaScript in an attempt to stop people having to download stuff that hasn't changed.
+It also attempts to shrink the size of the JavaScript so it will download faster.<br/><br/>
+
+As previously mentioned you can ignore both of these warnings, but if you're seriously looking to deploy qwebirc on a public site you really should install <a href="http://java.com/en/download/index.jsp">Java</a> for minification, and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a> for version tagging.
+
+<h4>I'm getting errors about dropin.cache.new when I run run.py!</h4>
+
+This is because your distro hasn't packaged twisted correctly (c.f. <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=477103">Debian bug report</a>).
+You can fix it by running <tt>twistd --help</tt> as root, if that doesn't work try the following:
+<pre>python -c 'from twisted.plugin import IPlugin, getPlugins; list(getPlugins(IPlugin))'</pre>
+
+<h4>Port 9090?! I want it to run as a VirtualHost in my existing webserver configuration, how?</h4>
+
+First, this is a bad idea, because Apache and most other webservers are not designed for large amounts of long-lived connections (like IRC connections).
+Conventional threaded or multi-process webservers (like Apache) will not be able to cope with more than a few dozen webchat users without falling over (and mostly likely 
+taking your other websites down at the same time)!<br/>
+qwebirc uses it's own embedded webserver which uses non-blocking multiplexing, and can cope with thousands of users easily, QuakeNet runs qwebirc on it's own IP 
+address.<br/><br/>
+
+Now if you really want to run qwebirc behind Apache, look at the mod_proxy documentation, but it's a really bad idea!
+
+<h3>Administration</h3>
+
+<h4>How can I see what qwebirc is doing?</h4>
+
+You can see basic information in the admin engine, visible at http://yourmachine:yourport/adminengine<br/><br/>
+
+Note that by default this is IP limited to 127.0.0.1, this is configurable in config.py (the ADMIN_ENGINE_HOSTS option).
