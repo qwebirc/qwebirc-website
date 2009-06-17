@@ -49,7 +49,7 @@ You can fix it by running <tt>twistd --help</tt> as root, if that doesn't work t
 First, this is a bad idea, because Apache and most other webservers are not designed for large amounts of long-lived connections (like IRC connections).
 Conventional threaded or multi-process webservers (like Apache) will not be able to cope with more than a few dozen webchat users without falling over (and mostly likely 
 taking your other websites down at the same time)!<br/>
-qwebirc uses it's own embedded webserver which uses non-blocking multiplexing, and can cope with thousands of users easily, QuakeNet runs qwebirc on it's own IP 
+qwebirc uses its own embedded webserver which uses non-blocking multiplexing, and can cope with thousands of users easily, QuakeNet runs qwebirc on its own IP 
 address.<br/><br/>
 
 Now if you really want to run qwebirc behind Apache, look at the mod_proxy documentation, but it's a really bad idea!
