@@ -1,79 +1,56 @@
-import cherrypy, os, string, signal, re
+import web
+import re
 
-favicon = open("static/favicon.ico", "rb").read()
+#web.config.debug = True
 
-CRETIN_REFERER_PATTERNS = [re.compile(x) for x in [
-  r".*alterIWNet.*",
-]]
+PAGES = dict((k, v if isinstance(v, dict) else dict(title=v, page_title=v)) for k, v in {
+  "news": dict(title="Welcome!", page_title="News"),
+  "features": dict(title="qwebirc's features", page_title="Features"),
+  "license": "License",
+  "download": "Download",
+  "about": "About",
+  "faq": "Frequently asked questions",
+  "irc": "IRC channel",
+  "installation": "Installation",
+}.items())
 
-class MainSite(object):
-  def is_hg(self):
-#    if cherrypy.request.headers.get("Host") != "hg.qwebirc.org":
-    return
-#
-#    if not cherrypy.request.query_string:
-#      raise cherrypy.HTTPRedirect("https://bitbucket.org/qwebirc/qwebirc/src/", 301)
-#
-#    raise cherrypy.HTTPRedirect("https://bitbucket.org/qwebirc/qwebirc/?%s" % cherrypy.request.query_string, 301)
+CRETIN_REFERRER_PATTERNS = [re.compile(x) for x in (
+  r"alterIWNet",
+)]
 
-  def __check_referrers(self):
-    referer = cherrypy.request.headers.get("Referer")
-    if referer is None:
-      return
+render = web.template.render('templates/')
 
-    return any(pattern.match(referer) for pattern in CRETIN_REFERER_PATTERNS)
+def check_referrer(fn):
+  def decorator(*args, **kwargs):
+    referrer = web.ctx.env.get("HTTP_REFERER")
+    if referrer is not None and any(x.search(referrer) for x in CRETIN_REFERRER_PATTERNS):
+      return "these aren't the droids you're looking for"
+    return fn(*args, **kwargs)
 
-  @cherrypy.expose
-  def index(self, *args, **kwargs):
-    self.is_hg()
-    if self.__check_referrers():
-      return "These aren't the droids you're looking for."
-    return self.news()
+  return decorator
 
-  def download_file(self, tag, format):
-    raise cherrypy.HTTPRedirect("http://hg.qwebirc.org/qwebirc/get/%s.%s" % (tag, format))
+class default(object):
+  @check_referrer
+  def GET(self, path):
+    if not path:
+      path = "news"
 
-  @cherrypy.expose
-  def favicon_ico(self):
-    #ie doesn't like this...
-    #cherrypy.response.headers["Content-Type"] = "image/vnd.microsoft.icon"
-    return favicon
+    return render.base(content=getattr(render, path)(), **PAGES[path])
 
-def set_downloads(obj):
-  for tag in ["default", "stable"]:
-    for format in ["gz", "bz2", "zip"]:
-      setattr(obj, "download-%s-%s" % (tag, format), (lambda tag=tag, format=format: cherrypy.expose(lambda: obj.download_file(tag, format)))())
+class download(object):
+  def GET(self, tag, format):
+    web.redirect("http://hg.qwebirc.org/qwebirc/get/%s.%s" % (tag, format))
 
-def set_templates(obj, pages):
-  base = "base.html"
-  rootdir = "static"
+urls = reduce(lambda x, y: x+y, (("^/(%s)$" % k, "default") for k in PAGES)) + (
+  "^/()$", "default"
+)
 
-  base_template = string.Template(open(os.path.join(rootdir, base), "r").read())
+for tag in "default", "stable":
+  for format in "gz", "bz2", "zip":
+    urls += ("^/download-(%s)-(%s)$" % (tag, format), "download")
 
-  for filename, data in pages.items():
-    if isinstance(data, basestring):
-      data = dict(title=data)
+app = web.application(urls, globals(), autoreload=True)
 
-    content = open(os.path.join(rootdir, "%s.html" % filename), "r").read()
-    sub = base_template.safe_substitute(dict(content=content, title=data["title"], page_title=data.get("page_title", data["title"])))
-    setattr(obj, filename, (lambda sub=sub: cherrypy.expose(lambda: sub))())
+if __name__ == "__main__":
+  app.run()
 
-site = MainSite()
-def reload():
-  set_templates(site, pages={
-    "news": dict(title="Welcome!", page_title="News"),
-    "features": dict(title="qwebirc's features", page_title="Features"),
-    "license": "License",
-    "download": "Download",
-    "about": "About",
-    "faq": "Frequently asked questions",
-    "irc": "IRC channel",
-    "installation": "Installation",
-  })
-
-reload()
-set_downloads(site)
-
-signal.signal(signal.SIGUSR2, lambda *args: reload())
-
-cherrypy.tree.mount(site, "/", config="qwebirc.conf")
