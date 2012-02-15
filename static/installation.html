@@ -1,0 +1,77 @@
+<ul>
+  <li>First install the dependencies for your operating system:
+    <ul>
+      <li><a href="#debian">Debian and derivatives (i.e. Ubuntu, Mint)</a></li>
+      <li><a href="#unix">Other Linux distros and other UNIXes (except FreeBSD)</a></li>
+      <li><a href="#freebsd">FreeBSD</a></li>
+      <li><a href="#windows">Windows</a></li>
+    </ul>
+  </li>
+  <li>Copy config.py.example to config.py, and edit it to fit your network's setup.</li>
+  <li>Run compile.py to "compile the HTML/js/css" <a href="faq#warnings">(note that warnings are just warnings, you can ignore them!)</a>.</li>
+  <li>Run run.py (if you get an error about the select reactor being already registered just run it again) -- note run.py has lots of arguments, you can see them with --help.</li>
+  <li>Browse to http://yourmachine:9090/</li>
+</ul>
+
+<hr/>
+
+<a name="debian" />
+<h2>Debain and derivatives (i.e. Ubuntu, Mint)</h2>
+
+Install the following packages:
+<ul>
+<li><b>python</b> (must be at least 2.5).</li>
+<li><b>python-twisted</b>, <b>python-twisted-bin</b>, <b>python-twisted-core</b>, <b>python-twisted-runner</b>, <b>python-twisted-names</b>, <b>python-twisted-mail</b>, <b>python-twisted-words</b> and <b>python-twisted-web</b> (must be at least Twisted 8.2.0).</li>
+<li><b>python-zope.interface</b> (at least 8.2.0)</li>
+<li>optional SSL support: <b>python-openssl</b>.</li>
+<li>optional Javascript minimisation: <b>openjdk-6</b>.</li>
+<li>optional efficient versioning: <b>mercurial</b>.</li>
+</ul>
+
+... for lazy people, here's all that in one big apt-gettable list:<br/>
+<b>python python-twisted python-twisted-bin python-twisted-core python-twisted-runner python-twisted-names python-twisted-mail python-twisted-words python-twisted-web python-zope.interface python-openssl openjdk-6 mercurial</b>
+
+<hr/>
+
+<a name="unix" />
+<h2>Other UNIX like operating systems, i.e. other Linux distros (bar FreeBSD)</h2>
+
+(note you might be able to install some of these via your OS package manager!)
+
+<ul>
+<li><a href="http://python.org/download/">Python</a> (at least version 2.5 but NOT 3.*).</li>
+<li><a href="http://pypi.python.org/pypi/zope.interface">zope.interface</a> (this is a dependency of Twisted so may not be required if your OS installs it).</li>
+<li><a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).</li>
+<li>optional SSL support: <a href="http://pypi.python.org/pypi/pyOpenSSL">pyOpenSSL</a>.</li>
+<li>optional Javascript minimisation: <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java</a> (the JRE is acceptable).</li>
+<li>optional efficient versioning: <a href="http://mercurial.selenic.com/">Mercurial</a>.</li>
+</ul>
+
+Though qwebirc will work without them, it is highly recommended that you also have <a href="http://java.com/en/download/index.jsp">Java</a> and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a>.
+
+<hr/>
+
+<a name="freebsd" />
+<h2>FreeBSD</h2>
+
+qwebirc has a FreeBSD port, in ports/irc/qwebirc, otherwise installation instructions are the same as for generic UNIX.
+
+<hr/>
+
+<a name="windows" />
+<h2>Windows</h2>
+
+<b>Make sure you download the packages for your version of Python -- <b>we suggest 32-bit versions of all packages</b>.</b>
+
+<ul>
+<li><a href="http://python.org/download/">Python</a> (at least version 2.5 but NOT 3.*, we suggest 2.7).</li>
+<li><a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).</li>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#zope.interface">zope.interface</a> (if not bundled with Twisted).</li>
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=78018">pywin32</a>.</li>
+<li>optional SSL support: <a href="http://pypi.python.org/pypi/pyOpenSSL">pyOpenSSL</a>.</li>
+<li>optional Javascript minimisation: <a href="http://java.com/en/download/index.jsp">Java</a>.</li>
+<li>optional efficient versioning: <a href="http://mercurial.selenic.com/wiki/Download?action=show&redirect=BinaryPackages">Mercurial</a>.</li>
+</ul>
+
+<hr/>
+

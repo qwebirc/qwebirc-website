@@ -1,0 +1,41 @@
+Please note this is NOT a general chat channel, it is for 
+discussion/questions/support relating to qwebirc.<br/><br/>
+
+<a href="installation">Stuck installing? Go here!</a><br/><br/>
+
+<script type="text/javascript">
+/* if you can't answer the question but you're smart
+   enough to look here then you're probably not going
+   to be spamming 'a/s/l' in the channel!
+*/
+
+function check_answer() {
+  var t = document.getElementById("answer");
+  var answer = t.value;
+  if(answer != (5 * 6) - 31) {
+    alert("Incorrect!");
+    t.value = "";
+    t.focus();
+    return;
+  }
+
+  document.getElementById("question").style.display = "none";
+  document.getElementById("details").style.display = "block";
+}
+window.onload = function() { document.getElementById("answer").focus() };
+
+</script>
+
+<div id="question">
+  In order to join please answer the following question:
+
+<pre style="font-size: 2em">
+cos &pi; = <input type="text" id="answer"/><input type="button" value="Submit" onclick="check_answer()" />
+</pre>
+</div>
+
+<div id="details" style="display: none">
+  Correct!<br/><br/>
+
+  You can join <a href="irc://irc.quakenet.org/dev">via your system IRC client</a>, or <a href="http://webchat.quakenet.org/?channels=dev" target="_new">use our webchat</a>.
+</div>

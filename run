@@ -1,4 +1,4 @@
 #!/bin/sh
-export PATH=/data/users/slug/install/bin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/data/users/slug/bin
-cd /data/users/slug/qwebirc.org
+export PATH=/home/slug/install/bin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/home/slug/bin
+cd /home/slug/qwebirc.org
 exec cherryd -e production -d -c server.conf -i qwebirc $*

@@ -1,4 +1,4 @@
-<a name="general">
+<a name="general" />
 <h3>General questions</h3>
 
 <h4>Who is this website aimed at?</h4>
@@ -6,30 +6,17 @@
 This site and the downloads on it aimed at IRC network administrators.<br/>
 The qwebirc frontend is designed to be used by anyone, if you're just trying to add webchat on your website, type <tt>/EMBED</tt> inside a <a href="http://webchat.quakenet.org">qwebirc instance</a>.
 
-<a name="installation">
-<h3>Installation</h3>
-
-<h4>What do I need to run qwebirc?</h4>
-
-You need <a href="http://python.org/download/">Python</a> (at least version 2.5) and <a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).<br/>
-On Windows you also require <a href="http://sourceforge.net/project/showfiles.php?group_id=78018">pywin32</a>.<br/>
-Though qwebirc will work without them, it is highly recommended that you also have <a href="http://java.com/en/download/index.jsp">Java</a> and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a>.
-
 <h4>What does qwebirc run on?</h4>
 
 The backend should run on anything that supports Python and Twisted, it has been tested on Linux, FreeBSD and Windows (XP and above).<br/>
-The frontend is tested on IE6, IE7, IE8, Firefox 3, Opera 9, Safari and Chrome.<br/>
+qwebirc is developed for QuakeNet's ircd: <a href="http://quakenet.org/development">snircd</a>; people have reported success on ircu and its derivatives, hyperion, charybdis, ratbox and UltimateIRCd, and in theory it should work on any <a href="http://www.faqs.org/rfcs/rfc1459.html">RFC 1459</a> compliant ircd.<br/>
+The frontend is tested on IE6, IE7, IE8, Firefox 3, Opera 10, Safari and Chrome.<br/>
 
 <h4>How do I get started?</h4>
 
-<ul>
-  <li>First make sure you've read the question above and you have everything required installed!</li>
-  <li>Copy config.py.example to config.py, and edit it to fit your setup.
-  <li>Run compile.py to generate the HTML, minify the Javascript/CSS and copy everything to the correct locations.</li>
-  <li>Run run.py (if you get an error about the select reactor being already registered just run it again) -- note run.py has lots of arguments, you can see them with --help.</li>
-  <li>Browse to http://yourmachine:9090/</li>
-</ul>
+Go to the <a href="installation">installation page</a> above.
 
+<a name="warnings" />
 <h4>I get warnings while running compile.py about java or hg, what are these?</h4>
 
 If the warnings are about hg not being able to generate an id, or not being able to minify you can ignore them (with some pitfalls)!<br/>
@@ -37,6 +24,16 @@ Normally qwebirc attempts to extract which version you are running (technically 
 It also attempts to shrink the size of the JavaScript so it will download faster.<br/><br/>
 
 As previously mentioned you can ignore both of these warnings, but if you're seriously looking to deploy qwebirc on a public site you really should install <a href="http://java.com/en/download/index.jsp">Java</a> for minification, and <a href="http://www.selenic.com/mercurial/wiki/index.cgi/BinaryPackages">Mercurial</a> for version tagging.
+
+<h4>I messages about Deprecation, what are these?</h4>
+
+You can completely ignore these warnings, they have no effect whatsoever.<br/>
+qwebirc uses md5 instead of hashlib so it can work on older versions of Python.
+
+<h4>How do I set up SSL support?</h4>
+
+Install <a href="http://openssl.org">OpenSSL</a> (most UNIX systems have it by default, Shining Light Productions offer a <a href="http://www.slproweb.com/products/Win32OpenSSL.html">version for Windows</a>) and <a href="http://sourceforge.net/project/showfiles.php?group_id=31249">pyOpenSSL</a>.<br/>
+You can then pass your PEM encoded certificate and key into run.py using the -C and -k options.
 
 <h4>I'm getting errors about dropin.cache.new when I run run.py!</h4>
 
