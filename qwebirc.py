@@ -39,7 +39,7 @@ class default(object):
 
 class download(object):
   def GET(self, tag, format):
-    web.redirect("http://hg.qwebirc.org/qwebirc/get/%s.%s" % (tag, format))
+    web.redirect("https://bitbucket.org/qwebirc/qwebirc/get/%s.%s" % (tag, format))
 
 urls = reduce(lambda x, y: x+y, (("^/(%s)$" % k, "default") for k in PAGES)) + (
   "^/()$", "default"
