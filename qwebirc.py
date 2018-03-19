@@ -45,7 +45,7 @@ urls = reduce(lambda x, y: x+y, (("^/(%s)$" % k, "default") for k in PAGES)) + (
   "^/()$", "default"
 )
 
-for tag in "master", "stable":
+for tag in "master",:
   for format in "zip",:
     urls += ("^/download-(%s)-(%s)$" % (tag, format), "download")
 
