@@ -114,7 +114,7 @@ div#content h4 {
 }
 
 div#text-image {
-  background-image: url(images/qwebirc-text.png);
+  background-image: url(../images/qwebirc-text.png);
   margin-top: 33px;
   height: 59px;
   background-repeat: no-repeat;
