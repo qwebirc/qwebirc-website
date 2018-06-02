@@ -1,18 +1,16 @@
-$def with (page_title, title, content)
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>$page_title - the qwebirc project</title>
+  <title>{{ page.title }} - the qwebirc project</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-  <link rel="icon" type="image/png" href="/static/images/favicon.png"/>
-  <link rel="stylesheet" href="/static/css/screen.css" type="text/css" media="screen"/>
+  <link rel="icon" type="image/png" href="images/favicon.png"/>
+  <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen"/>
 </head>
 <body>
   <div id="header">
     <div class="image" style="height: 134px; overflow: hidden;">
-      <a href="/"><img src="/static/images/qwebircsmall.png" alt="qwebirc" title="qwebirc" height="134" width="134"/></a>
+      <a href="./"><img src="images/qwebircsmall.png" alt="qwebirc" title="qwebirc" height="134" width="134"/></a>
     </div>
     <div class="right">
       <div class="text">
@@ -23,7 +21,7 @@ $def with (page_title, title, content)
       </div>
       <div id="menu">
         <span>
-          <a href="/news">News</a> |
+          <a href="./">News</a> |
           <a href="about">About</a> |
           <a href="features">Features</a> |
           <a href="license">License</a> |
@@ -40,9 +38,9 @@ $def with (page_title, title, content)
   </div>
   <div id="blocker"></div>
   <div id="content">
-    <h2>$title</h2>
+    <h2>{{ page.title }}</h2>
     <div id="text">
-$:content
+{{ content }}
     </div>
   </div>
 </body>
