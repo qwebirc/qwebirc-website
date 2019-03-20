@@ -11,6 +11,8 @@ title: Installation
       <li><a href="#windows">Windows</a></li>
     </ul>
   </li>
+  <li>Check out/download the code</li>
+  <li>For all except FreeBSD: in the directory run: pip install -r requirements.txt</li>
   <li>Copy config.py.example to config.py, and edit it to fit your network's setup.</li>
   <li>Run compile.py to "compile the HTML/js/css" <a href="faq#warnings">(note that warnings are just warnings, you can ignore them!)</a>.</li>
   <li>Run run.py (if you get an error about the select reactor being already registered just run it again) -- note run.py has lots of arguments, you can see them with --help.</li>
@@ -24,16 +26,8 @@ title: Installation
 
 Install the following packages:
 <ul>
-<li><b>python</b> (must be at least 2.5).</li>
-<li><b>python-twisted</b>, <b>python-twisted-bin</b>, <b>python-twisted-core</b>, <b>python-twisted-runner</b>, <b>python-twisted-names</b>, <b>python-twisted-mail</b>, <b>python-twisted-words</b> and <b>python-twisted-web</b> (must be at least Twisted 8.2.0).</li>
-<li><b>python-zope.interface</b> (at least 8.2.0)</li>
-<li>optional SSL support: <b>python-openssl</b>.</li>
-<li>optional Javascript minimisation: <b>openjdk-6</b>.</li>
-<li>optional efficient versioning: <b>git</b>.</li>
-</ul>
 
-... for lazy people, here's all that in one big apt-gettable list:<br/>
-<b>python python-twisted python-twisted-bin python-twisted-core python-twisted-runner python-twisted-names python-twisted-mail python-twisted-words python-twisted-web python-zope.interface python-openssl openjdk-6 git</b>
+<b>apt-get install python python-pip python-openssl openjdk-8-jre-headless git</b>
 
 <hr/>
 
@@ -43,15 +37,11 @@ Install the following packages:
 (note you might be able to install some of these via your OS package manager!)
 
 <ul>
-<li><a href="http://python.org/download/">Python</a> (at least version 2.5 but NOT 3.*).</li>
-<li><a href="http://pypi.python.org/pypi/zope.interface">zope.interface</a> (this is a dependency of Twisted so may not be required if your OS installs it).</li>
-<li><a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).</li>
+<li><a href="http://python.org/download/">Python</a> (at least version 2.7.9 but NOT 3.*, this version should come with pip)</li>
 <li>optional SSL support: <a href="http://pypi.python.org/pypi/pyOpenSSL">pyOpenSSL</a>.</li>
 <li>optional Javascript minimisation: <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java</a> (the JRE is acceptable).</li>
 <li>optional efficient versioning: <a href="https://git-scm.com/">git</a>.</li>
 </ul>
-
-Though qwebirc will work without them, it is highly recommended that you also have <a href="http://java.com/en/download/index.jsp">Java</a> and git.
 
 <hr/>
 
@@ -68,9 +58,7 @@ qwebirc has a FreeBSD port, in ports/irc/qwebirc, otherwise installation instruc
 <b>Make sure you download the packages for your version of Python -- <b>we suggest 32-bit versions of all packages</b>.</b>
 
 <ul>
-<li><a href="http://python.org/download/">Python</a> (at least version 2.5 but NOT 3.*, we suggest 2.7).</li>
-<li><a href="http://twistedmatrix.com/trac/">Twisted</a> (at least version 8.2.0).</li>
-<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#zope.interface">zope.interface</a> (if not bundled with Twisted).</li>
+<li><a href="http://python.org/download/">Python</a> (at least version 2.7.9 but NOT 3.* -- this version should come with pip).</li>
 <li><a href="http://sourceforge.net/project/showfiles.php?group_id=78018">pywin32</a>.</li>
 <li>optional SSL support: <a href="http://pypi.python.org/pypi/pyOpenSSL">pyOpenSSL</a>.</li>
 <li>optional Javascript minimisation: <a href="http://java.com/en/download/index.jsp">Java</a>.</li>
