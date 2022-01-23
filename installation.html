@@ -12,10 +12,21 @@ title: Installation
     </ul>
   </li>
   <li>Check out/download the code</li>
-  <li>For all except FreeBSD: in the directory run: pip install -r requirements.txt</li>
+  <li>Create a virtual environment, activate it and install the python dependencies:
+    <ul>
+      <li>virtualenv -p python2 venv</li>
+      <li>source venv/bin/activate</li>
+      <li>pip install -r requirements.txt</li>
+    </ul>
+  </li>
   <li>Copy config.py.example to config.py, and edit it to fit your network's setup.</li>
   <li>Run compile.py to "compile the HTML/js/css" <a href="faq#warnings">(note that warnings are just warnings, you can ignore them!)</a>.</li>
   <li>Run run.py (if you get an error about the select reactor being already registered just run it again) -- note run.py has lots of arguments, you can see them with --help.</li>
+  <li>Note: each time you run you will need to activate the virtual environment first with:</li>
+  <ul>
+      <li>source venv/bin/activate</li>
+  </ul>
+  Alternatively: you can run: /path/to/you/qwebirc/install/venv/bin/python run.py</li>
   <li>Browse to http://yourmachine:9090/</li>
 </ul>
 
@@ -26,7 +37,7 @@ title: Installation
 
 Install the following packages:
 
-<b>python python-pip python-openssl openjdk-8-jre-headless git</b>
+<b>python2 python3-pip python3-openssl openjdk-11-jre-headless git python3-virtualenv</b>
 
 <hr/>
 
